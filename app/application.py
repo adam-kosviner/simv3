@@ -59,10 +59,10 @@ def pipeline():
 
             vcf = form.vcf_path.data
             mutate_rate = int(form.mutation_rate.data)
-
+            chrome_start_input = int(form.chrome_start.data)
             logging.info("Acquired Values")
 
-            mutate.mutating(mutate_rate, vcf, output, bed_file_path)
+            mutate.mutating(mutate_rate, vcf, output, bed_file_path, chrome_start_input)
 
             logging.info("Created VCF")
 
@@ -113,11 +113,11 @@ def dbmutate():
             #ensure_dir(output)
             mutate_rate = int(form.mutation_rate.data)
             bed_file_path = form.bed_file.data
-
+            chrome_start_input = int(form.chrome_start.data)
             logging.info("Acquired Values")
             logging.info('New VCF Path: ' + output)
 
-            mutate.mutating(mutate_rate, vcf, output, bed_file_path)
+            mutate.mutating(mutate_rate, vcf, output, bed_file_path, chrome_start_input)
 
             logging.info("Created VCF")
 

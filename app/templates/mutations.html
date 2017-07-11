@@ -266,6 +266,10 @@
           <label data-toggle="tooltip" data-placement="right" title="Example: 500, 1000">Amount of Space in Between Mutations:</label><br>
           {{ form.mutation_rate(size=120) }}
         </div>
+        <div class="form-group">
+          <label data-toggle="tooltip" data-placement="right" title="Example: 0, 1, 3">First Variant Offset</label><br>
+          {{ form.chrome_start(size=120) }}
+        </div>
         <br>
         <input type="submit" name="submit" value="Create Truth VCF">
       </div>

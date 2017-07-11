@@ -12,9 +12,10 @@ Config.read("../config")
 logger = logging.getLogger(__name__)
 
 
-def mutating(desired_interval, input_vcf, output_vcf, bed_file):
+def mutating(desired_interval, input_vcf, output_vcf, bed_file, chrome_start):
     previous_chromosome = None
     this_variant_position = None
+    counter = int(0)
 
     # open either vcf or vcf.gz
     logging.info("Checking if imput vcf has .gz ending")
@@ -56,14 +57,21 @@ def mutating(desired_interval, input_vcf, output_vcf, bed_file):
                 this_variant_position = int(line.split()[1])
 
                 if this_chromosome != previous_chromosome:
+                    counter = chrome_start
                     previous_chromosome = this_chromosome
                     ref_position = this_variant_position
-                    stream_out.write(line)
+                    target = ref_position
+                    if counter == 0:
+                        stream_out.write(line)
+                        target = ref_position + desired_interval
                     belowline = line
                     below = this_variant_position
-                    target = ref_position + desired_interval
                     continue
-
+                if counter > 0:
+                    counter = counter -1
+                    belowline = line
+                    below = this_variant_position
+                    continue
                 if this_variant_position > target:
                     above = this_variant_position
                     if (above - target) < (target - below):

@@ -20,6 +20,7 @@ class Mutate(Form):
     vcf_path = StringField('vcf_path', validators=[DataRequired()])
     mutation_rate = StringField('mutation_rate', validators=[DataRequired()])
     bed_file = StringField('bed_file', validators=[DataRequired()])
+    chrome_start = StringField('chrome_start', validators=[DataRequired()])
 
 
 class Reads(Form):
